@@ -1,2 +1,2 @@
 ### Agentic AI Chatbot
-- Updated the Repo Staructure
+- Updated the Repo Structure
