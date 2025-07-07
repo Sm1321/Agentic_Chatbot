@@ -1,7 +1,7 @@
 import streamlit as st
 import json
 from src.langgraphagenticai.ui.streamlitui.loadui import LoadStreamlitUI
-# from src.langgraphagenticai.LLMS.groqllm import GroqLLM
+from src.langgraphagenticai.LLMS.groqllm import GroqLLM
 
 # MAIN Function START
 def load_langgraph_agenticai_app():
@@ -19,29 +19,37 @@ def load_langgraph_agenticai_app():
     if not user_input:
         st.error("Error: Failed to load user input from the UI.")
         return
+    
 
-    # Text input for user message
-    if  st.session_state.IsFetchButtonClicked:
+    # ✅ Initialize the session state variable if it doesn't exist
+    if "IsFetchButtonClicked" not in st.session_state:
+        st.session_state.IsFetchButtonClicked = False
+
+    # ✅ Example of how to initialize timeframe as well (optional safety)
+    if "timeframe" not in st.session_state:
+        st.session_state.timeframe = ""
+
+    # 🔄 Now safe to access IsFetchButtonClicked
+    if st.session_state.IsFetchButtonClicked:
         user_message = st.session_state.timeframe 
-    else :
+    else:
         user_message = st.chat_input("Enter your message:")
 
     if user_message:
             try:
-                 pass
-                # # Configure LLM
-                # obj_llm_config = GroqLLM(user_controls_input=user_input)
-                # model = obj_llm_config.get_llm_model()
+                # Configure LLM
+                obj_llm_config = GroqLLM(user_controls_input=user_input)
+                model = obj_llm_config.get_llm_model()
                 
-                # if not model:
-                #     st.error("Error: LLM model could not be initialized.")
-                #     return
+                if not model:
+                    st.error("Error: LLM model could not be initialized.")
+                    return
 
-                # # Initialize and set up the graph based on use case
-                # usecase = user_input.get('selected_usecase')
-                # if not usecase:
-                #     st.error("Error: No use case selected.")
-                #     return
+                # Initialize and set up the graph based on use case
+                usecase = user_input.get('selected_usecase')
+                if not usecase:
+                    st.error("Error: No use case selected.")
+                    return
                 
 
             except Exception as e:
