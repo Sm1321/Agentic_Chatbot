@@ -18,7 +18,7 @@ class Config:
         return self.config["DEFAULT"].get("USECASE_OPTIONS").split(", ")
     
     def get_groq_model_options(self):
-        #it will retun all the LLLM OPtions in the Deafult one
+        #it will retun all the GROQ_MODEL_OPTIONS in the Deafult one
         return self.config["DEFAULT"].get("GROQ_MODEL_OPTIONS").split(", ") #Split by comma and space
     
     def get_page_title(self):
